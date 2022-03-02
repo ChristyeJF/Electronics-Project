@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/modules/exporting.js"></script>
+ <script src="https://code.highcharts.com/modules/export-data.js"></script>
+ <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <style>
+    body {
+      min-width: 200px;
+      max-width: 1280px;
+      height: 500px;
+      margin: 0 auto;
+      color: blue;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+      color: red;
+      background-image: url("https://mdn.mozillademos.org/files/11991/startransparent.gif");
+    }
+  </style>
+  <body>
+    <h2>ESP32 Gráfico_Electrónica</h2>
+    <div id="chart-temperature" class="container"></div>
+    <div id="chart-approximate-altitude" class="container"></div>
+    <div id="chart-pressure" class="container"></div>
+    <script>
+      setInterval(function(){
+               $.ajax({
+                   url:'Gráfico.php',
+                   cache:false,
+                   dataType: 'json',
+                   success:function(datos){
+                       chart = new Highcharts.Chart(
+                           document.querySelector("#chart-temperature"),
+                           datos
+                       );
+                       chart.render();
+                   }
+               });
+               }, 5000)
+    </script>
+</body>
+</html>
